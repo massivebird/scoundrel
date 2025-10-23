@@ -8,6 +8,8 @@ pub struct Game {
     player: Player,
     deck: Deck,
     room: Room,
+    // Only one heal per room, the rest are discarded.
+    has_healed: bool,
 }
 
 impl Game {
@@ -19,6 +21,7 @@ impl Game {
             player: Player::new(),
             deck,
             room,
+            has_healed: false,
         }
     }
 
@@ -28,13 +31,19 @@ impl Game {
         };
 
         match card.suit {
-            Suit::Hearts => self.player.heal(card.rank.value()),
+            Suit::Hearts => {
+                if !self.has_healed {
+                    self.player.heal(card.rank.value());
+                    self.has_healed = true;
+                }
+            }
             Suit::Diamonds => self.player.equip(card),
             Suit::Clubs | Suit::Spades => self.player.battle(card),
         }
 
         if self.room.vacancies() == 3 {
             self.room.try_fill(&mut self.deck);
+            self.has_healed = false;
         }
     }
 

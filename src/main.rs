@@ -33,8 +33,6 @@ fn main() {
             KeyCode::Char('4') => game.interact(3),
 
             KeyCode::Char('q') => break,
-            KeyCode::Char('w') => print!("ok"),
-            KeyCode::Char('v') => game.print_game(),
             _ => (),
         }
 
