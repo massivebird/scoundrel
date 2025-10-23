@@ -1,3 +1,4 @@
+use colored::Colorize;
 use strum::{Display, EnumIter};
 
 #[derive(Copy, Clone, Debug, Display, EnumIter)]
@@ -71,6 +72,14 @@ impl Rank {
 
 impl std::fmt::Display for Card {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}{}", self.rank, self.suit)
+        let base = self.rank.to_string() + &self.suit.to_string();
+
+        let color = match self.suit {
+            Suit::Hearts => colored::Color::Red,
+            Suit::Diamonds => colored::Color::Yellow,
+            Suit::Spades | Suit::Clubs => colored::Color::Blue,
+        };
+
+        write!(f, "{}", base.color(color))
     }
 }
