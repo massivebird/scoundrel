@@ -4,6 +4,7 @@ use crate::deck::Deck;
 pub struct Room([Option<Card>; 4]);
 
 impl Room {
+    // Creates a full room by drawing four cards from the deck.
     pub fn from_deck(deck: &mut Deck) -> Self {
         let mut room: [Option<Card>; 4] = [None; 4];
 

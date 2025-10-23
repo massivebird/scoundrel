@@ -5,19 +5,19 @@ use std::io::Write;
 
 mod card;
 mod deck;
+mod player;
 mod room;
 
 fn main() {
     let mut stdout = std::io::stdout();
 
     crossterm::execute!(stdout, crossterm::cursor::Hide).unwrap();
+
     crossterm::terminal::enable_raw_mode().unwrap();
 
     let mut rng = rand::rng();
-
     let mut deck = Deck::generate(&mut rng);
-
-    let mut room: Room = Room::from_deck(&mut deck);
+    let mut room = Room::from_deck(&mut deck);
 
     while let Ok(event) = crossterm::event::read() {
         let Some(event) = event.as_key_event() else {
