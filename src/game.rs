@@ -38,11 +38,15 @@ impl Game {
         }
     }
 
+    pub fn is_over(&self) -> bool {
+        self.player.hp() == 0 || (self.room.vacancies() == 4 && self.deck.is_empty())
+    }
+
     pub fn print_game(&self) {
         for card in self.room.iter() {
             match card {
                 Some(card) => print!("{card} "),
-                None => print!("_ "),
+                None => print!("__ "),
             }
         }
         println!("\r");

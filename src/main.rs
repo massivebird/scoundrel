@@ -40,5 +40,10 @@ fn main() {
 
         stdout.flush().unwrap();
         game.print_game();
+
+        if game.is_over() {
+            println!("Game over!");
+            break;
+        }
     }
 }

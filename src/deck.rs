@@ -33,4 +33,8 @@ impl Deck {
     pub fn draw(&mut self) -> Option<Card> {
         self.0.pop_front()
     }
+
+    pub fn is_empty(&self) -> bool {
+        self.0.is_empty()
+    }
 }
