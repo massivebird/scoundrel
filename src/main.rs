@@ -12,7 +12,6 @@ fn main() {
     let mut stdout = std::io::stdout();
 
     crossterm::execute!(stdout, crossterm::cursor::Hide).unwrap();
-
     crossterm::terminal::enable_raw_mode().unwrap();
 
     let mut rng = rand::rng();
