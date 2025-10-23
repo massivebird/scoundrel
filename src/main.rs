@@ -1,22 +1,19 @@
-use self::card::{Card, Rank, Suit};
-use rand::seq::SliceRandom;
-use std::collections::VecDeque;
-use strum::IntoEnumIterator;
+use self::{card::Card, deck::Deck};
 
 mod card;
+mod deck;
 
 fn main() {
-    let mut deck: VecDeque<Card> = VecDeque::new();
-
     let mut rng = rand::rng();
 
-    for rank in Rank::iter() {
-        for suit in Suit::iter() {
-            deck.push_front(Card { rank, suit });
-        }
+    let mut deck = Deck::generate(&mut rng);
+
+    let mut room: [Option<Card>; 4] = [const { None }; 4];
+
+    // Initial populate
+    for slot in &mut room {
+        *slot = deck.draw();
     }
 
-    deck.make_contiguous().shuffle(&mut rng);
-
-    dbg!(deck);
+    dbg!(room);
 }
