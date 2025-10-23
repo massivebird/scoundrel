@@ -47,6 +47,7 @@ impl Game {
         if self.room.vacancies() == 3 {
             self.room.try_fill(&mut self.deck);
             self.has_healed = false;
+            self.has_avoided = false;
         }
     }
 
