@@ -1,5 +1,4 @@
-use crate::card::Card;
-use crate::deck::Deck;
+use crate::{card::Card, deck::Deck};
 
 pub struct Room([Option<Card>; 4]);
 

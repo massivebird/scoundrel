@@ -1,7 +1,4 @@
-use crate::card::Suit;
-use crate::deck::Deck;
-use crate::player::Player;
-use crate::room::Room;
+use crate::{card::Suit, deck::Deck, player::Player, room::Room};
 use rand::rngs::ThreadRng;
 
 pub struct Game {
