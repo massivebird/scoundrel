@@ -1,11 +1,11 @@
-use std::io::Write;
-
+use self::deck::Deck;
+use self::room::Room;
 use crossterm::event::KeyCode;
-
-use self::{card::Card, deck::Deck};
+use std::io::Write;
 
 mod card;
 mod deck;
+mod room;
 
 fn main() {
     let mut stdout = std::io::stdout();
@@ -17,12 +17,7 @@ fn main() {
 
     let mut deck = Deck::generate(&mut rng);
 
-    let mut room: [Option<Card>; 4] = [const { None }; 4];
-
-    // Initial populate
-    for slot in &mut room {
-        *slot = deck.draw();
-    }
+    let mut room: Room = Room::from_deck(&mut deck);
 
     while let Ok(event) = crossterm::event::read() {
         let Some(event) = event.as_key_event() else {
@@ -33,14 +28,14 @@ fn main() {
             KeyCode::Char('q') => break,
             KeyCode::Char('w') => print!("ok"),
             KeyCode::Char('r') => {
-                for card in room {
+                for card in room.iter() {
                     match card {
                         Some(card) => print!("{card} "),
                         None => print!("_ "),
                     }
                 }
                 println!("\r");
-            },
+            }
             _ => (),
         }
 
