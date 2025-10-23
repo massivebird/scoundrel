@@ -17,6 +17,7 @@ impl Player {
 
     pub const fn equip(&mut self, weapon: Card) {
         self.weapon = Some(weapon);
+        self.slain_enemy = None;
     }
 
     pub fn heal(&mut self, amount: u32) {
