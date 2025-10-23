@@ -24,20 +24,17 @@ fn main() {
         *slot = deck.draw();
     }
 
-    'outer: loop {
-        for event in crossterm::event::read() {
-            let Some(event) = event.as_key_event() else {
-                println!("con");
-                continue;
-            };
+    while let Ok(event) = crossterm::event::read() {
+        let Some(event) = event.as_key_event() else {
+            continue;
+        };
 
-            match event.code {
-                KeyCode::Char('q') => break 'outer,
-                KeyCode::Char('w') => println!("w"),
-                _ => (),
-            }
+        match event.code {
+            KeyCode::Char('q') => break,
+            KeyCode::Char('w') => print!("w"),
+            _ => (),
         }
-    }
 
-    dbg!(room);
+        stdout.flush().unwrap();
+    }
 }
