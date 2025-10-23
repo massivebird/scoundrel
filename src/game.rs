@@ -73,7 +73,7 @@ impl Game {
             print!(" ( {enemy} )");
         }
 
-        println!("\r");
+        println!(", Deck: {}\r", self.deck.len());
     }
 
     /// Avoiding fails if:
