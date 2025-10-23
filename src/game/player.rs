@@ -1,4 +1,4 @@
-use crate::card::Card;
+use super::card::Card;
 
 pub struct Player {
     weapon: Option<Card>,

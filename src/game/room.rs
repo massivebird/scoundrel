@@ -1,4 +1,4 @@
-use crate::{card::Card, deck::Deck};
+use super::{card::Card, deck::Deck};
 
 pub struct Room([Option<Card>; 4]);
 

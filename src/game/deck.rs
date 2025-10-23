@@ -1,9 +1,7 @@
-use rand::rngs::ThreadRng;
-use rand::seq::SliceRandom;
-use strum::IntoEnumIterator;
-
-use crate::card::{Card, Rank, Suit};
+use super::card::{Card, Rank, Suit};
+use rand::{rngs::ThreadRng, seq::SliceRandom};
 use std::collections::VecDeque;
+use strum::IntoEnumIterator;
 
 pub struct Deck(VecDeque<Card>);
 

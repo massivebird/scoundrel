@@ -2,11 +2,7 @@ use self::game::Game;
 use crossterm::event::KeyCode;
 use std::io::Write;
 
-mod card;
-mod deck;
 mod game;
-mod player;
-mod room;
 
 static WELCOME: &str = "Welcome to Scoundrel!\r";
 
