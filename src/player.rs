@@ -43,10 +43,15 @@ impl Player {
     }
 
     pub fn power(&self) -> u32 {
-        self.slain_enemy
-            .map(|card| card.rank.value())
-            .or_else(|| self.weapon.map(|card| card.rank.value()))
-            .unwrap_or_default()
+        let slain_power = self.slain_enemy.map(|e| e.rank.value());
+        let weapon_power = self.weapon.map(|e| e.rank.value());
+
+        match (slain_power, weapon_power) {
+            (Some(slain), Some(wpn)) => slain.min(wpn),
+            (None, Some(wpn)) => wpn,
+            (None, None) => 0,
+            _ => unreachable!(),
+        }
     }
 
     pub const fn hp(&self) -> u32 {

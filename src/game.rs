@@ -62,7 +62,7 @@ impl Game {
         println!("\r");
 
         print!(
-            "{} HP, WPN: {}",
+            "{:2} HP, WPN: {}",
             self.player.hp(),
             self.player
                 .weapon()
