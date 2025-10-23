@@ -31,7 +31,16 @@ fn main() {
 
         match event.code {
             KeyCode::Char('q') => break,
-            KeyCode::Char('w') => print!("w"),
+            KeyCode::Char('w') => print!("ok"),
+            KeyCode::Char('r') => {
+                for card in room {
+                    match card {
+                        Some(card) => print!("{card} "),
+                        None => print!("_ "),
+                    }
+                }
+                println!("\r");
+            },
             _ => (),
         }
 
