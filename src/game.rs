@@ -32,6 +32,10 @@ impl Game {
             Suit::Diamonds => self.player.equip(card),
             Suit::Clubs | Suit::Spades => self.player.battle(card),
         }
+
+        if self.room.vacancies() == 3 {
+            self.room.try_fill(&mut self.deck);
+        }
     }
 
     pub fn print_game(&self) {
@@ -43,6 +47,13 @@ impl Game {
         }
         println!("\r");
 
-        println!("{} HP, WPN: {:?}, POW: {}\r", self.player.hp(), self.player.weapon(), self.player.power());
+        println!(
+            "{} HP, WPN: {}, POW: {}\r",
+            self.player.hp(),
+            self.player
+                .weapon()
+                .map_or("None".to_owned(), |c| c.to_string()),
+            self.player.power()
+        );
     }
 }

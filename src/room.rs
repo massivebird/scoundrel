@@ -34,4 +34,8 @@ impl Room {
     pub fn iter_mut(&mut self) -> std::slice::IterMut<'_, Option<Card>> {
         self.0.iter_mut()
     }
+
+    pub fn vacancies(&self) -> usize {
+        self.0.iter().filter(|c| c.is_none()).count()
+    }
 }
