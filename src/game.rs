@@ -61,14 +61,19 @@ impl Game {
         }
         println!("\r");
 
-        println!(
-            "{} HP, WPN: {}, POW: {}\r",
+        print!(
+            "{} HP, WPN: {}",
             self.player.hp(),
             self.player
                 .weapon()
                 .map_or("None".to_owned(), |c| c.to_string()),
-            self.player.power()
         );
+
+        if let Some(enemy) = self.player.slain_enemy() {
+            print!(" ( {enemy} )");
+        }
+
+        println!("\r");
     }
 
     /// Avoiding fails if:

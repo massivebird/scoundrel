@@ -56,4 +56,8 @@ impl Player {
     pub const fn weapon(&self) -> Option<Card> {
         self.weapon
     }
+
+    pub const fn slain_enemy(&self) -> Option<Card> {
+        self.slain_enemy
+    }
 }
