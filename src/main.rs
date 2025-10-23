@@ -8,6 +8,13 @@ mod game;
 mod player;
 mod room;
 
+static WELCOME: &str = "Welcome to Scoundrel!\r";
+
+static CONTROLS: &str = "\
+[1 — 4]: Interact with card\r
+[a]: Avoid room\r
+[q]: Quit\r";
+
 fn main() {
     let mut stdout = std::io::stdout();
 
@@ -17,10 +24,12 @@ fn main() {
     let mut rng = rand::rng();
     let mut game = Game::new(&mut rng);
 
+    println!("{WELCOME}");
+    println!("{CONTROLS}\n");
+
     game.print_game();
 
     while let Ok(event) = crossterm::event::read() {
-
         let Some(event) = event.as_key_event() else {
             continue;
         };
@@ -38,6 +47,7 @@ fn main() {
         }
 
         stdout.flush().unwrap();
+        println!("\r");
         game.print_game();
 
         if game.is_over() {
