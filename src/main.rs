@@ -28,6 +28,9 @@ fn main() {
 
         match event.code {
             KeyCode::Char('1') => game.interact(0),
+            KeyCode::Char('2') => game.interact(1),
+            KeyCode::Char('3') => game.interact(2),
+            KeyCode::Char('4') => game.interact(3),
 
             KeyCode::Char('q') => break,
             KeyCode::Char('w') => print!("ok"),

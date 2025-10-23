@@ -24,7 +24,7 @@ impl Player {
     }
 
     pub fn battle(&mut self, enemy: Card) {
-        if self.effective_power() >= enemy.rank.value() {
+        if self.power() >= enemy.rank.value() {
             self.slain_enemy = Some(enemy);
             return;
         }
@@ -33,7 +33,7 @@ impl Player {
 
         // Fresh weapon is being used against a higher power enemy.
         if self.weapon.is_some() && self.slain_enemy.is_none() {
-            self.hp = self.hp.saturating_sub(enemy_power - self.effective_power());
+            self.hp = self.hp.saturating_sub(enemy_power - self.power());
             self.slain_enemy = Some(enemy);
             return;
         }
@@ -41,7 +41,7 @@ impl Player {
         self.hp = self.hp.saturating_sub(enemy_power);
     }
 
-    fn effective_power(&self) -> u32 {
+    pub fn power(&self) -> u32 {
         self.slain_enemy
             .map(|card| card.rank.value())
             .or_else(|| self.weapon.map(|card| card.rank.value()))
