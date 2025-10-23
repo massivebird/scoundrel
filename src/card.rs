@@ -50,21 +50,21 @@ pub struct Card {
 }
 
 impl Rank {
-    pub fn value(&self) -> u32 {
+    pub const fn value(self) -> u32 {
         match self {
-            Rank::Ace => 14,
-            Rank::King => 13,
-            Rank::Queen => 12,
-            Rank::Jack => 11,
-            Rank::Ten => 10,
-            Rank::Nine => 9,
-            Rank::Eight => 8,
-            Rank::Seven => 7,
-            Rank::Six => 6,
-            Rank::Five => 5,
-            Rank::Four => 4,
-            Rank::Three => 3,
-            Rank::Two => 2,
+            Self::Ace => 14,
+            Self::King => 13,
+            Self::Queen => 12,
+            Self::Jack => 11,
+            Self::Ten => 10,
+            Self::Nine => 9,
+            Self::Eight => 8,
+            Self::Seven => 7,
+            Self::Six => 6,
+            Self::Five => 5,
+            Self::Four => 4,
+            Self::Three => 3,
+            Self::Two => 2,
         }
     }
 }

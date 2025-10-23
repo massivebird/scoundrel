@@ -4,7 +4,7 @@ use crate::deck::Deck;
 pub struct Room([Option<Card>; 4]);
 
 impl Room {
-    // Creates a full room by drawing four cards from the deck.
+    /// Creates a full room by drawing four cards from the deck.
     pub fn from_deck(deck: &mut Deck) -> Self {
         let mut room: [Option<Card>; 4] = [None; 4];
 
@@ -19,8 +19,8 @@ impl Room {
         self.0.get_mut(index)?.take()
     }
 
-    // Fills vacant spaces in the room by drawing from the deck, as long as the
-    // deck still contains cards.
+    /// Fills vacant spaces in the room by drawing from the deck, as long as the
+    /// deck still contains cards.
     pub fn try_fill(&mut self, deck: &mut Deck) {
         for space in self.0.iter_mut().filter(|op| op.is_none()) {
             *space = deck.draw();

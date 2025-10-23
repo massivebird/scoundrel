@@ -8,7 +8,7 @@ use std::collections::VecDeque;
 pub struct Deck(VecDeque<Card>);
 
 impl Deck {
-    // Generates a shuffled Scoundrel deck.
+    /// Generates a shuffled Scoundrel deck.
     pub fn generate(rng: &mut ThreadRng) -> Self {
         let mut deck: VecDeque<Card> = VecDeque::new();
 
@@ -32,6 +32,13 @@ impl Deck {
 
     pub fn draw(&mut self) -> Option<Card> {
         self.0.pop_front()
+    }
+
+    /// Places a card at the bottom of the deck.
+    ///
+    /// I gotta rename this, man
+    pub fn tuck(&mut self, card: Card) {
+        self.0.push_back(card);
     }
 
     pub fn is_empty(&self) -> bool {

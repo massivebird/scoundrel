@@ -32,6 +32,8 @@ fn main() {
             KeyCode::Char('3') => game.interact(2),
             KeyCode::Char('4') => game.interact(3),
 
+            KeyCode::Char('a') => game.try_avoid(),
+
             KeyCode::Char('q') => break,
             _ => (),
         }

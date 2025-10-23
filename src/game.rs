@@ -8,8 +8,10 @@ pub struct Game {
     player: Player,
     deck: Deck,
     room: Room,
-    // Only one heal per room, the rest are discarded.
+    /// Only one heal per room, the rest are discarded.
     has_healed: bool,
+    /// Cannot avoid two rooms in a row.
+    has_avoided: bool,
 }
 
 impl Game {
@@ -22,6 +24,7 @@ impl Game {
             deck,
             room,
             has_healed: false,
+            has_avoided: false,
         }
     }
 
@@ -68,5 +71,22 @@ impl Game {
                 .map_or("None".to_owned(), |c| c.to_string()),
             self.player.power()
         );
+    }
+
+    /// Avoiding fails if:
+    /// 1. The player avoided the previous room, or
+    /// 2. This room is not full (player has entered, or this is the final room).
+    pub fn try_avoid(&mut self) {
+        if self.has_avoided || self.room.vacancies() > 0 {
+            return;
+        }
+
+        for card in self.room.iter_mut().filter(|c| c.is_some()) {
+            self.deck.tuck(card.take().unwrap());
+        }
+
+        self.has_avoided = true;
+
+        self.room.try_fill(&mut self.deck);
     }
 }
