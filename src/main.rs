@@ -1,10 +1,10 @@
-use self::deck::Deck;
-use self::room::Room;
+use self::game::Game;
 use crossterm::event::KeyCode;
 use std::io::Write;
 
 mod card;
 mod deck;
+mod game;
 mod player;
 mod room;
 
@@ -16,29 +16,26 @@ fn main() {
     crossterm::terminal::enable_raw_mode().unwrap();
 
     let mut rng = rand::rng();
-    let mut deck = Deck::generate(&mut rng);
-    let mut room = Room::from_deck(&mut deck);
+    let mut game = Game::new(&mut rng);
+
+    game.print_game();
 
     while let Ok(event) = crossterm::event::read() {
+
         let Some(event) = event.as_key_event() else {
             continue;
         };
 
         match event.code {
+            KeyCode::Char('1') => game.interact(0),
+
             KeyCode::Char('q') => break,
             KeyCode::Char('w') => print!("ok"),
-            KeyCode::Char('r') => {
-                for card in room.iter() {
-                    match card {
-                        Some(card) => print!("{card} "),
-                        None => print!("_ "),
-                    }
-                }
-                println!("\r");
-            }
+            KeyCode::Char('v') => game.print_game(),
             _ => (),
         }
 
         stdout.flush().unwrap();
+        game.print_game();
     }
 }

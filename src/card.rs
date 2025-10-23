@@ -49,6 +49,26 @@ pub struct Card {
     pub suit: Suit,
 }
 
+impl Rank {
+    pub fn value(&self) -> u32 {
+        match self {
+            Rank::Ace => 14,
+            Rank::King => 13,
+            Rank::Queen => 12,
+            Rank::Jack => 11,
+            Rank::Ten => 10,
+            Rank::Nine => 9,
+            Rank::Eight => 8,
+            Rank::Seven => 7,
+            Rank::Six => 6,
+            Rank::Five => 5,
+            Rank::Four => 4,
+            Rank::Three => 3,
+            Rank::Two => 2,
+        }
+    }
+}
+
 impl std::fmt::Display for Card {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}{}", self.rank, self.suit)
